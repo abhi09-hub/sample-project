@@ -32,18 +32,18 @@ provider "aws" {
    region = "us-east-1"
 }
 
-resource "aws_lambda_function" "example" {
-   function_name = "ServerlessExample"
+resource "aws_lambda_function" "test" {
+   function_name = "Serverlesstest"
 
    # The bucket name as created earlier with "aws s3api create-bucket"
-   s3_bucket = "terraform-serverless-example"
-   s3_key    = "v1.0.0/example.zip"
+   s3_bucket = "terraform-serverless-test"
+   s3_key    = "v1.0.0/test.zip"
 
    # "main" is the filename within the zip file (main.js) and "handler"
    # is the name of the property under which the handler function was
    # exported in that file.
    handler = "main.handler"
-   runtime = "nodejs10.x"
+   runtime = "python 3.8"
 
    role = aws_iam_role.lambda_exec.arn
 }
@@ -51,7 +51,7 @@ resource "aws_lambda_function" "example" {
  # IAM role which dictates what other AWS services the Lambda function
  # may access.
 resource "aws_iam_role" "lambda_exec" {
-   name = "serverless_example_lambda"
+   name = "serverless_test_lambda"
 
    assume_role_policy = <<EOF
 {
